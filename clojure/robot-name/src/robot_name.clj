@@ -23,6 +23,9 @@
 (defn robot-name [robot]
   (if-let [existing-name (get @robot-names robot)]
     existing-name
-    (let [name (random-name)])))
+    (let [name (random-name)]
+      (swap! robot-names assoc robot name)
+      name)))
 
-(defn reset-name [robot] )
+(defn reset-name [robot]
+  (swap! robot-names dissoc robot))
