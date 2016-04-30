@@ -1,15 +1,19 @@
 (ns trinary)
 
-(def t2d {\0 0 \1 1 \2 2})
+(defn char-value-mapping [base]
+  (zipmap (apply str (range base)) (range base)))
 
-(defn to-decimal [trinary-string]
-  (if-not (every? t2d trinary-string)
-    0
-    (loop [position 1
-           num 0
-           digits (reverse trinary-string)]
-      (if (empty? digits)
-        num
-        (recur (* 3 position)
-               (+ num (* (t2d (first digits)) position))
-               (rest digits))))))
+(defn -to-decimal [base numstring]
+  (let [mapping (char-value-mapping base)]
+    (if-not (every? mapping numstring)
+      0
+      (loop [position 1
+             num 0
+             digits (reverse numstring)]
+        (if (empty? digits)
+          num
+          (recur (* base position)
+                 (+ num (* (mapping (first digits)) position))
+                 (rest digits)))))))
+
+(def to-decimal (partial -to-decimal 3))
