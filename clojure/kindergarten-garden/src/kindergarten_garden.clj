@@ -1,6 +1,7 @@
-(ns kindergarten-garden)
+(ns kindergarten-garden
+  (:require [clojure.string :refer [lower-case]]))
 
-(def students [:alice :bob :charlie :david :eve :fred :ginny
+(def default-students [:alice :bob :charlie :david :eve :fred :ginny
                :harriet :ileana :joseph :kincaid :larry])
 
 (def plantings {\V :violets \C :clover \R :radishes \G :grass})
@@ -14,9 +15,14 @@
 
 (defn convert-planting-symbols [string] (map plantings string))
 
-(defn garden [row-string]
-  (->> row-string
-       (group-plantings)
-       (map convert-planting-symbols)
-       (zipmap students)))
+(defn format-name [student] (-> student name lower-case keyword))
+
+(defn prep-students [students] (sort (map format-name students)))
+
+(defn garden
+  ([row-string] (garden row-string default-students))
+  ([row-string students] (->> row-string
+                              (group-plantings)
+                              (map convert-planting-symbols)
+                              (zipmap (prep-students students)))))
 

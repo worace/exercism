@@ -34,7 +34,7 @@
     (is (= [:grass    :violets  :clover   :violets]  (:larry   full-garden)))))
 
 (deftest surprise-garden-test
-  #_(let [string   "VCRRGVRG\nRVGCCGCV"
+  (let [string   "VCRRGVRG\nRVGCCGCV"
         students ["Samantha" "Patricia" "Xander" "Roger"]
         surprise-garden (kindergarten-garden/garden string students)]
     (is (= [:violets  :clover   :radishes :violets]
