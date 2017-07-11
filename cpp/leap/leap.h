@@ -1,5 +1,5 @@
-#if !defined(HELLO_WORLD_H)
-#define HELLO_WORLD_H
+#if !defined(LEAP_H)
+#define LEAP_H
 
 namespace leap {
   bool is_leap_year(int year) {
