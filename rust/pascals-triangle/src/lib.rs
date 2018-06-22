@@ -16,8 +16,7 @@ pub struct PascalsTriangle {
 
 
 fn next_row(prev_row: &Vec<u32>) -> Vec<u32> {
-    let mut next_row = Vec::new();
-    for i in 0..prev_row.len() + 1 {
+    (0..prev_row.len()+1).map(|i| {
         let mut value = 0;
         if i > 0 {
             match prev_row.get(i - 1) {
@@ -25,13 +24,14 @@ fn next_row(prev_row: &Vec<u32>) -> Vec<u32> {
                 None => {}
             }
         }
+
         match prev_row.get(i) {
             Some(x) => {value += *x},
             None => {}
         }
-        next_row.push(value);
-    }
-    next_row
+
+        value
+    }).collect()
 }
 
 impl PascalsTriangle {
