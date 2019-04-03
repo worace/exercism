@@ -13,6 +13,6 @@ class HighScores
   end
 
   def personal_top_three
-    scores.sort.reverse.take(3)
+    scores.max(3)
   end
 end
